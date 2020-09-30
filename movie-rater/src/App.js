@@ -50,6 +50,13 @@ function App() {
     setSelectedMovie(newMovies);
   }
 
+  const removeClicked = (movie) => {
+    const newMovies = movies.filter( mov => mov.id !== movie.id);
+    setMovie(newMovies);
+    
+    }
+    
+
 
   useEffect(
       () => {
@@ -73,7 +80,10 @@ function App() {
       
       <div className="layout">
         <div>
-          <MovieList movies = {movies} movieClicked={movieClicked} editClicked={editClicked}/>
+          <MovieList movies = {movies}
+           movieClicked={movieClicked}
+            editClicked={editClicked}
+            removeClicked={removeClicked}/>
           <button onClick={newMovie}>New movie</button>
         </div>
           <MovieDetails movie={selectedMovie} updateMovie={loadMovie}/>

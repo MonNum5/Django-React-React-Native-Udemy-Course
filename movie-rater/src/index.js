@@ -1,13 +1,33 @@
-import React from 'react';
+import React, { createContext }from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { Route, BrowserRouter } from 'react-router-dom'
+import Auth from './components/auth'
+
+export const TokenContext = createContext(null);
+
+function Router(){
+const TOKEN = "d95b85db6a50b0c80811d15b5d5f47584efb2a48";
+return(
+
+  
+
+  <React.StrictMode>
+  	<TokenContext.Provider value={TOKEN}>
+	    <BrowserRouter>
+	    	<Route exact path="/" component={Auth}/>
+	    	<Route exact path="/movies" component={App}/>
+	    </BrowserRouter>
+    </TokenContext.Provider>
+  </React.StrictMode>
+  
+  )
+}
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Router />,
   document.getElementById('root')
 );
 
