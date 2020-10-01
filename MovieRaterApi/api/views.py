@@ -13,8 +13,8 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 class UserViewSet(viewsets.ModelViewSet):
 	queryset = User.objects.all()
 	serializer_class = UserSerializer
-	authentication_classes = (TokenAuthentication, )
-	permission_classes = (IsAuthenticated, )
+	permission_classes = (AllowAny,)
+
 class MovieViewSet(viewsets.ModelViewSet):
 	queryset = Movie.objects.all()
 	serializer_class = MovieSerializer
@@ -27,7 +27,6 @@ class MovieViewSet(viewsets.ModelViewSet):
 			movie = Movie.objects.get(id=pk)
 			stars = request.data['stars']
 			user = request.user
-			print(user)
 
 			try:
 				rating = Rating.objects.get(user=user.id, movie=movie.id)

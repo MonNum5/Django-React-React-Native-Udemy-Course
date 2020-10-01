@@ -66,6 +66,49 @@
   margin: 20px 8px;
 }
 
+.login-container {
+  width: 50%;
+  margin: 0 25%;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  font-size: 0.8rem;
+}
+
+button {
+  color: #444;
+  background-attachment: white;
+  padding: 5px 10px;
+  border-radius: 2px;
+  font-weight: bold;
+  font-size: 0.8rem;
+  width: 60%;
+  margin: 0 20%;
+
+}
+
+button:disabled {
+  color: white;
+  background-attachment: #444;
+  cursor: not-allowed;
+}
+
+.fa-trash {
+  color: crimson;
+}
+
+h1 {
+  color: orange;
+}
+
+h1 .fa-film {
+  color: white;
+  transform: rotate(30deg);
+
+}
 
 @keyframes App-logo-spin {
   from {
