@@ -6,7 +6,9 @@ import MovieDetails from './components/movie-details';
 import MovieForm from './components/movie-form';
 import { useCookies } from 'react-cookie';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFilm } from '@fortawesome/free-solid-svg-icons';
+import { faFilm, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import { useFetch } from './hooks/useFetch';
+
 
 function App() {
 
@@ -17,10 +19,12 @@ function App() {
 
   const [editedMovie, setEditedMovie] = useState(null);
 
-  const [token] = useCookies(['mr-token']);
+  const [token, setToken, deleteToken] = useCookies(['mr-token']);
+  
+  const [data, loading, error] = useFetch();
 
   useEffect( () => {
-    if (!token['mr-token']) window.location.href = '/movies';
+    if (!token['mr-token']) window.location.href = '/';
   }, [token])
 
   const movieClicked = movie => {
@@ -67,20 +71,20 @@ function App() {
     }
     
 
-  useEffect(
-      () => {
-        fetch("http://127.0.0.1:8000/api/movies/", {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Token ${token['mr-token']}`,
-          }
-        })
-        .then( resp => resp.json())
-        .then( resp => setMovie(resp))
-        .catch( error => console.log(error))
-      }, [])
+  useEffect( () => {
+      console.log(data)
+        setMovie(data)
+      }, [data])
 
+  const logoutUser = () => {
+    deleteToken(['mr-token']);
+    window.location.href = '/movies';
+  }
+
+  if (loading)
+    return (<h1>Loading....</h1>)
+  if (error)
+    return (<h1> Error </h1>)
 
   return (
     <div className="App">
@@ -89,7 +93,7 @@ function App() {
       <FontAwesomeIcon icon={faFilm}/>
       <span>Movie Rater</span></h1>
       </header>
-      
+      <FontAwesomeIcon onClick = {logoutUser}icon={faSignOutAlt}/>
       <div className="layout">
         <div>
           <MovieList movies = {movies}

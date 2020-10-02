@@ -110,6 +110,14 @@ h1 .fa-film {
 
 }
 
+.fa-sign-out-alt {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  cursor: pointer;
+  font-size: 4rem;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
