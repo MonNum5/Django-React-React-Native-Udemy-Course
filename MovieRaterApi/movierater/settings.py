@@ -28,7 +28,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["movie-rater-01.herokuapp.com","127.0.0.1",]
 
 
 # Application definition
@@ -62,6 +62,9 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    'https://movie-rater-b2d29.web.app',
+    'https://movie-rater-b2d29.firebaseapp.com',
+
 ]
 
 ROOT_URLCONF = 'movierater.urls'
@@ -88,7 +91,7 @@ WSGI_APPLICATION = 'movierater.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-default_dburl = 'sql:///'+os.path.join(BASE_DIR,'db.sqlite3')
+default_dburl = 'sqlite:///'+os.path.join(BASE_DIR,'db.sqlite3')
 
 DATABASES = {
     'default': config('DATABASES_URL',default=default_dburl, cast=dburl),
